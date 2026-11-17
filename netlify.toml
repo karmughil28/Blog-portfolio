@@ -1,7 +1,15 @@
 [build]
+  command = "npm --prefix frontend ci && npm --prefix frontend run build"
+  publish = "frontend/dist"
   functions = "netlify/functions"
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# Single-page app fallback so client-side routes (e.g. /blogs/123) resolve on refresh
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200
